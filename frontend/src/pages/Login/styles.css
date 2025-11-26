@@ -1,0 +1,80 @@
+/* src/components/LoginForm.css */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #092768;
+  }
+  
+  .login-form {
+    background: white;
+    padding: 70px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+  }
+  
+  .login-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .input-group {
+    margin-bottom: 15px;
+  }
+  
+  .input-group label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .input-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #86eafc;
+    border-radius: 8px;
+    box-sizing: border-box; 
+  }
+  
+  .button {
+    width: 100%;
+    padding: 15px;
+    background-color: #101f30;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .back-button {
+    background-color: #2bf7f7;
+    color: rgb(4, 14, 58);
+  }
+  
+  .button:hover {
+    background-color: #84bffd;
+  }
+
+  .back-button:hover {
+    background-color: #6558d1;
+  }
+  
+  .error {
+    color: red;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  .signup {
+    color: #011122;
+    padding: 15px;
+  }
+  
+  .signup:hover {
+    background-color: #011730;
+    border-radius: 30px;
+    color: #FFF;
+  }
+  

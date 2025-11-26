@@ -1,0 +1,80 @@
+import { useEffect, useState } from "react"
+import { updateAtendimento } from "../../api/atendimento";
+import { useLocation, useNavigate } from "react-router-dom";
+import './styles.css'
+import { toast } from "react-toastify";
+
+export default function UpdateAtendimento() {
+    const navigate = useNavigate()
+    const [atendimento, setAtendimento] = useState({
+        nome: '',
+        email: '',
+        senha: '',
+        ativo: true
+    })
+    
+    const location = useLocation()
+    const { cliente: prevCliente } = location.state
+
+    const handleChange = (e) => {
+        const { id, value } = e.target;
+        setCliente({
+            ...cliente,
+            [id]: value
+        })
+    }
+
+    const handleReset = (e) => {
+        e.preventDefault()
+     
+        setCliente({ ...prevCliente, senha: '' })
+    }
+
+    const handleSave = async (e) => {
+        e.preventDefault()
+     
+        const response = await updateCliente(prevCliente.id, cliente)
+
+        if (response.status === 200) {
+            navigate('/clientes')
+            toast("Cliente alterado com sucesso")
+        } else {
+            toast("Erro ao criar Cliente")
+            console.log(response)
+        }
+    }
+
+  
+    useEffect(() => {
+        setCliente({ ...prevCliente, senha: '' })
+    }, [])
+
+    return (
+        <div className="form">
+            <form>
+                <div>
+                    <label>Nome: </label>
+                    <input type="text" name="nome" id='nome' value={cliente.nome} onChange={handleChange} />
+                </div>
+                <div>
+                    <label>Email: </label>
+                    <input type="email" name="email" id='email' value={cliente.email} onChange={handleChange} />
+                </div>
+                <div>
+                    <label>Senha: </label>
+                    <input type="password" name="senha" id='senha' value={cliente.senha} onChange={handleChange} />
+                </div>
+                <div className="actions">
+                    <button
+                        type="reset"
+                        onClick={handleReset}
+                    >Limpar</button>
+                    <button
+                        type="submit"
+                        onClick={handleSave}
+                    >Enviar</button>
+                </div>
+            </form>
+        </div>
+    )
+}
