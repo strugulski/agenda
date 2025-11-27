@@ -4,11 +4,13 @@ function Home() {
     return (
         <div className="home">
             Outras informações e um
-             <Link to='/agenda'>
+             <Link to='/home'>
                 <button>
-                    Navegar para AGENDA
+                    BEM VINDO
                 </button>
+                
             </Link> 
+            <a href="././login"></a>
         </div>
     )
 }

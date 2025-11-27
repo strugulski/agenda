@@ -11,7 +11,7 @@ export default function Header() {
         <header>
             <h1>Minha AGENDA</h1>
             <nav>
-                <Link to='/'>
+                <Link to='/home'>
                     <button>
                         Inicio
                     </button>
@@ -19,7 +19,7 @@ export default function Header() {
                               {
                     !token
                         ? null
-                        : <Link to='/clientes'>
+                        : <Link to="../../api/clientes">
                             <button>
                                 Clientes
                             </button>
@@ -30,7 +30,7 @@ export default function Header() {
                         Login
                     </button>
                 </Link>
-                  <Link to='/'>
+                  <Link to='../../api/atendimento'>
                     <button>
                         Atendimento
                     </button>

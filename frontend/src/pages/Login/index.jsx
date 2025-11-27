@@ -5,6 +5,7 @@ import { loginCliente } from '../../api/clientes';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../auth/Context';
 
+
 export default function Login() {
     const { login } = useContext(AuthContext) 
     const navigate = useNavigate();
@@ -40,11 +41,15 @@ export default function Login() {
                     <label htmlFor="senha">Senha:</label>
                     <input type="password" id="senha" required value={senha} onChange={(e) => setSenha(e.target.value)} />
                 </div>
-                <p>Não possui conta? <spam className="signup">Cadastre-se</spam></p>
+                <p>Não possui conta? <spam className="signup">Cadastre-se</spam>  
+           
+                </p>
+              
                 <button className="button"
                     type="submit"
                     onClick={handleLogin}
                 >Entrar</button>
+                <a href="../create.jsx"></a>
                 <button className="button back-button"
                     onClick={handleBackClick}
                 >

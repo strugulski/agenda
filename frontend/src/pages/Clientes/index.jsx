@@ -35,13 +35,15 @@ function Clientes() {
         <main>
             <div className='cliente-list'>
                 <div>
-                    <Link to={'/create/cliente'}>
+                    <Link to={'./create/cliente'}>
                         <button>Criar</button>
+                        <a href="./create"></a>
                     </Link>
                 </div>
                 <div className='cliente header' key='header'>
-                    <label>Nome</label>
+                    
                     <label>Email</label>
+                    <label>Senha</label>
                     
                 </div>
                 {
@@ -51,8 +53,9 @@ function Clientes() {
                         </div>
                         : clientes.map(cliente =>
                             <div className='cliente' key={cliente.id}>
-                                <label>{cliente.nome}</label>
                                 <label>{cliente.email}</label>
+                                <label>{cliente.senha}</label>
+                                
                                 <div className='actions'>
                                     <button
                                         type='button'

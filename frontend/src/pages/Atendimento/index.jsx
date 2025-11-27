@@ -38,6 +38,7 @@ function Atendimento() {
                     <Link to={'/create/atendimento'}>
                         <button>Criar</button>
                     </Link>
+                    <a href="./create.jsx"></a>
                 </div>
                 <div className='atendimento header' key='header'>
                     <label>dia</label>

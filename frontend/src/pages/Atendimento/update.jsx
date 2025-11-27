@@ -14,12 +14,12 @@ export default function UpdateAtendimento() {
     })
     
     const location = useLocation()
-    const { cliente: prevCliente } = location.state
+    const { atendimento: prevAtendimento } = location.state
 
     const handleChange = (e) => {
         const { id, value } = e.target;
-        setCliente({
-            ...cliente,
+        setAtendimento({
+            ...atendimento,
             [id]: value
         })
     }
@@ -27,42 +27,42 @@ export default function UpdateAtendimento() {
     const handleReset = (e) => {
         e.preventDefault()
      
-        setCliente({ ...prevCliente, senha: '' })
+        setAtendimento({ ...prevAtendimento, senha: '' })
     }
 
     const handleSave = async (e) => {
         e.preventDefault()
      
-        const response = await updateCliente(prevCliente.id, cliente)
+        const response = await updateAtendimento(prevAtendimento.id, atendimento)
 
         if (response.status === 200) {
-            navigate('/clientes')
-            toast("Cliente alterado com sucesso")
+            navigate('/atendimento')
+            toast("Atendimento alterado com sucesso")
         } else {
-            toast("Erro ao criar Cliente")
+            toast("Erro ao criar Atendimento")
             console.log(response)
         }
     }
 
   
     useEffect(() => {
-        setCliente({ ...prevCliente, senha: '' })
+        setAtendimento({ ...prevAtendimento, senha: '' })
     }, [])
 
     return (
         <div className="form">
             <form>
                 <div>
-                    <label>Nome: </label>
-                    <input type="text" name="nome" id='nome' value={cliente.nome} onChange={handleChange} />
+                    <label>Dia: </label>
+                    <input type="text" name="dia" id='dia' value={Atendimento.dia} onChange={handleChange} />
                 </div>
                 <div>
-                    <label>Email: </label>
-                    <input type="email" name="email" id='email' value={cliente.email} onChange={handleChange} />
+                    <label>Hora: </label>
+                    <input type="text" name="hora" id='hora' value={Atendimento.hora} onChange={handleChange} />
                 </div>
                 <div>
-                    <label>Senha: </label>
-                    <input type="password" name="senha" id='senha' value={cliente.senha} onChange={handleChange} />
+                    <label>Valor: </label>
+                    <input type="text" name="valor" id='valor' value={Atendimento.valor} onChange={handleChange} />
                 </div>
                 <div className="actions">
                     <button
