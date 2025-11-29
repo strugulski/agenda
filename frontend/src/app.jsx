@@ -25,6 +25,9 @@ function App() {
           <Route path='/create/cliente' element={<CreateCliente />} />
           <Route path='/update/cliente' element={<UpdateCliente />} />
         </Route>
+      
+          
+        
 
       </Routes>
 

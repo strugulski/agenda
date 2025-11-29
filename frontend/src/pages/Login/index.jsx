@@ -32,29 +32,28 @@ export default function Login() {
     return (
         <div className="login-container">
             <form className="login-form">
-                <h2>Login</h2>
+                <h2>LoGiN</h2>
                 <div className="input-group">
-                    <label htmlFor="email">Email:</label>
+                    <label htmlFor="email">EMAIL:</label>
                     <input type="text" id="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
                 </div>
                 <div className="input-group">
-                    <label htmlFor="senha">Senha:</label>
+                    <label htmlFor="senha">SENHA:</label>
                     <input type="password" id="senha" required value={senha} onChange={(e) => setSenha(e.target.value)} />
                 </div>
-                <p>Não possui conta? <spam className="signup">Cadastre-se</spam>  
-           
-                </p>
+                
+                <p>Não possui conta? <spam className="signup">Cadastre-Se</spam></p>
+              
               
                 <button className="button"
                     type="submit"
-                    onClick={handleLogin}
-                >Entrar</button>
+                    onClick={handleLogin}>ENTRAR</button>
+
                 <a href="../create.jsx"></a>
                 <button className="button back-button"
-                    onClick={handleBackClick}
-                >
-                    Voltar
-                </button>
+                    onClick={handleBackClick}>VOLTAR</button>
+            
+            
             </form>
         </div>
     );

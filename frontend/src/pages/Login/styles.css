@@ -7,7 +7,7 @@
   }
   
   .login-form {
-    background: white;
+    background: rgb(227, 247, 244);
     padding: 70px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -40,7 +40,7 @@
     width: 100%;
     padding: 15px;
     background-color: #101f30;
-    color: white;
+    color: rgb(112, 231, 202);
     border: none;
     border-radius: 8px;
     cursor: pointer;
