@@ -41,7 +41,7 @@ function Agenda() {
                     Voltar para home
                 </button>
             </Link>
-            {/* Filtros */}
+           
             <div className='lista-principal'>
                 {conteudo}
             </div>

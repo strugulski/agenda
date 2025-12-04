@@ -1,10 +1,9 @@
 import { useContext, useState } from 'react';
 import './styles.css'
 import { useNavigate } from 'react-router-dom';
-import { loginCliente } from '../../api/clientes';
+import { loginCliente } from '../../api/cliente.jsx';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../auth/Context';
-
 
 export default function Login() {
     const { login } = useContext(AuthContext) 
@@ -25,35 +24,32 @@ export default function Login() {
             login(response.data.token)
             navigate('/clientes')
         } catch (error) {
-            toast("Email ou senha inválidos!!!")
+            toast("Email ou senha inválidos")
         }
     }
 
     return (
         <div className="login-container">
             <form className="login-form">
-                <h2>LoGiN</h2>
+                <h2>Login</h2>
                 <div className="input-group">
-                    <label htmlFor="email">EMAIL:</label>
+                    <label htmlFor="email">Email:</label>
                     <input type="text" id="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
                 </div>
                 <div className="input-group">
-                    <label htmlFor="senha">SENHA:</label>
+                    <label htmlFor="senha">Senha:</label>
                     <input type="password" id="senha" required value={senha} onChange={(e) => setSenha(e.target.value)} />
                 </div>
-                
-                <p>Não possui conta? <spam className="signup">Cadastre-Se</spam></p>
-              
-              
+                <p>Não possui conta? <spam className="signup">Cadastre-se</spam></p>
                 <button className="button"
                     type="submit"
-                    onClick={handleLogin}>ENTRAR</button>
-
-                <a href="../create.jsx"></a>
+                    onClick={handleLogin}
+                >Entrar</button>
                 <button className="button back-button"
-                    onClick={handleBackClick}>VOLTAR</button>
-            
-            
+                    onClick={handleBackClick}
+                >
+                    Voltar
+                </button>
             </form>
         </div>
     );

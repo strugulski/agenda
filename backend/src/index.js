@@ -9,7 +9,7 @@ app.use(express.json())
 app.use(cors())
 
 app.use('/api/v1', router)
-const port = 3000 
+const port = 3000
 
 database.db
     .sync({ force: false })
@@ -19,5 +19,6 @@ database.db
         })
     })
     .catch((e)=> {
-        console.log("Não conectou com o banco"+ e)
+        console.log("não conectou com o banco"+ e)
     })
+

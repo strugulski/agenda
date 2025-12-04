@@ -2,7 +2,7 @@ import './App.css'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import { Route, Routes } from 'react-router-dom'
-import Clientes from './pages/Clientes'
+import Cliente from './pages/Clientes/index.jsx'
 import Home from './pages/Home'
 import CreateCliente from './pages/Clientes/create'
 import UpdateCliente from './pages/Clientes/update'
@@ -11,8 +11,9 @@ import Login from './pages/Login'
 import { AuthProvider } from './auth/Context'
 import PrivateRoute from './router/PrivateRoute'
 
-function App() {
 
+function App() {
+  // pegar token 
   return (
     <AuthProvider>
       <Header />
@@ -21,13 +22,10 @@ function App() {
         <Route path='/login' element={<Login />} />
 
         <Route element={<PrivateRoute />}>
-          <Route path='/clientes' element={<Clientes />} />
+          <Route path='/clientes' element={<Cliente />} />
           <Route path='/create/cliente' element={<CreateCliente />} />
           <Route path='/update/cliente' element={<UpdateCliente />} />
         </Route>
-      
-          
-        
 
       </Routes>
 

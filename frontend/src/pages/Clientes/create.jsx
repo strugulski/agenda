@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { createCliente } from "../../api/clientes";
+import { createCliente } from "../../api/cliente.jsx";
 import { useNavigate } from "react-router-dom";
 import './styles.css'
 import { toast } from "react-toastify";
@@ -8,12 +8,12 @@ const INITIAL_STATE = {
     nome: '',
     email: '',
     senha: '',
-    ativo: true
+    
 }
 
 export default function CreateCliente() {
     const navigate = useNavigate()
-    const [cliente, setCliente] = useState(INITIAL_STATE)
+    const [cliente, setUser] = useState(INITIAL_STATE)
 
     const handleChange = (e) => {
         const { id, value } = e.target;
@@ -25,19 +25,19 @@ export default function CreateCliente() {
 
     const handleReset = (e) => {
         e.preventDefault()
-        setCliente(INITIAL_STATE)
+        setUser(INITIAL_STATE)
     }
 
     const handleSave = async (e) => {
         e.preventDefault()
-       
+      
         const response = await createCliente(cliente)
 
         if (response.status === 201) {
-            toast("Cliente criado com sucesso")
-            navigate('/Clientes')
+            toast("Usuário criado com sucesso")
+            navigate('/clientes')
         } else {
-            toast("Erro ao criar Cliente")
+            toast("Erro ao criar Usuário")
             console.log(response)
         }
     }

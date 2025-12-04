@@ -1,19 +1,15 @@
 import { useState } from "react"
-import { CreateAtendimento } from "../../api/atendimento";
 import { useNavigate } from "react-router-dom";
-import './styles.css'
-import { toast } from "react-toastify";
-
-const INITIAL_STATE = {
-    dia: '',
-    hora: '',
-    valor: '',
-    concluido: true
-}
+import { createAtendimento } from "../../api/atendimentos";
 
 export default function CreateAtendimento() {
     const navigate = useNavigate()
-    const [atendimento, setAtendimento] = useState(INITIAL_STATE)
+    const [atendimento, setAtendimento] = useState({
+        dia: '',
+        hora: '',
+        valor: '',
+        concluido: false
+    })
 
     const handleChange = (e) => {
         const { id, value } = e.target;
@@ -23,51 +19,49 @@ export default function CreateAtendimento() {
         })
     }
 
-    const handleReset = (e) => {
-        e.preventDefault()
-        setAtendimento(INITIAL_STATE)
-    }
-
     const handleSave = async (e) => {
         e.preventDefault()
-       
         const response = await createAtendimento(atendimento)
 
         if (response.status === 201) {
-            toast("Atendimento criado com sucesso")
-            navigate('/atendimento')
-        } else {
-            toast("Erro ao criar Atendimento")
-            console.log(response)
+            navigate('/atendimentos')
         }
     }
 
     return (
-        <div className="form">
+        <main>
             <form>
                 <div>
-                    <label>Dia: </label>
-                    <input type="text" name="dia" id='dia' value={atendimento.dia} onChange={handleChange} />
+                    <label>Dia:</label>
+                    <input type="number" name="dia" id="dia" value={atendimento.dia} onChange={handleChange} />
                 </div>
                 <div>
-                    <label>Hora: </label>
-                    <input type="hora" name="hora" id='hora' value={atendimento.hora} onChange={handleChange} />
+                    <label>Hora:</label>
+                    <input type="time" name="hora" id="hora" value={atendimento.hora} onChange={handleChange} />
                 </div>
                 <div>
-                    <label>Valor: </label>
-                    <input type="valor" name="valor" id='valor' value={atendimento.valor} onChange={handleChange} />
+                    <label>Valor:</label>
+                    <input type="number" name="valor" id="valor" value={atendimento.valor} onChange={handleChange} />
                 </div>
-                <div className="actions">
-                    <button
-                        type="reset"
-                        onClick={handleReset}
-                    >Limpar</button>
-                    <button
-                        type="submit"
-                        onClick={handleSave}
-                    >Enviar</button>
+                <div>
+                    <label>Concluido:</label>
+                    <select
+                        name="concluido"
+                        value={atendimento.concluido ? "true" : "false"}
+                        onChange={(e) =>
+                            setAtendimento({ ...atendimento, concluido: e.target.value === "true" })
+                        }
+                    >
+                        <option value="true">Sim</option>
+                        <option value="false">Não</option>
+                    </select>
                 </div>
+                <button type="reset">Limpar</button>
+                <button
+                    type="submit"
+                    onClick={handleSave}
+                >Enviar</button>
             </form>
-        </div>
+        </main>
     )
 }

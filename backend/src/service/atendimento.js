@@ -13,75 +13,52 @@ class ServiceAtendimento {
 
     async FindOne(id) {
         if (!id) {
-            throw new Error("Por favor informar o ID")
+            throw new Error("Favor informar o ID")
         }
 
-        const atendimento = await Atendimento.findByPk(id)
+        // preciso procurar um usuario no banco
+        const user = await Atendimento.findByPk(id)
 
-        if (!atendimento) {
-            throw new Error(`Atendimento ${id} não foi encontrado`)
+        if (!user) {
+            throw new Error(`Usuário ${id} não encontrado`)
         }
 
-        return atendimento
+        return user
     }
 
-    async Create(dia, hora, valor, concluido) {
-        if (!dia || !hora || !valor || !concluido) {
-            throw new Error("Por favor preencher todos os campos")
+    async Create(dia, data, hora, valor, concluido) {
+        if (!dia || !data || !hora) {
+            throw new Error("favor preencher todos os campos")
         }
 
+        const senhaCrip = await bcrypt.hash(String(hora), SALT)
+
         await Atendimento.create({
-            dia,
-            hora,
-            valor,
-            concluido
-            
-            
+            nome: dia,
+            email: data,
+            senha: senhaCrip,
+            ativo: valor,
+
         })
     }
 
-    async Update(id, dia, hora, valor) {
-        const oldAtendimento = await Atendimento.findByPk(id)
-        
-        oldAtendimento.dia = dia
-            ? await bcrypt.hash(String(dia), SALT)
-            : oldAtendimento.dia
-            
-            oldAtendimento.hora = hora
-            ? await bcrypt.hash(String(hora), SALT)
-            : oldAtendimento.hora
+    async Update(id, data, hora) {
+        const oldUser = await Atendimento.findByPk(id)
+        // oldUser.nome = nome || oldUser.nome
 
-            oldAtendimento.valor = valor
-            ? await bcrypt.hash(String(valor), SALT)
-            : oldAtendimento.valor
+        oldUser.senha = hora
+            ? await bcrypt.hash(String(hora), SALT)
+            : oldUser.senha
+
+        // Cliente.update(id, nome)
     }
 
     async Delete(id) {
-        const oldAtendimento = await Atendimento.findByPk(id)
+        const oldUser = await Atendimento.findByPk(id)
 
-        oldAtendimento.destroy()
+        oldUser.destroy()
     }
 
-    async Login(dia, hora, valor) {
-        if(!dia || !hora || !valor) {
-            throw new Error("Atendimento inválido!.")
-        }
-
-        const atendimento = await Atendimento.findOne({ where: { dia } })
-
-        if (
-            !atendimento
-            || !(await bcrypt.compare(String(hora), atendimento.hora))
-        ) {
-            throw new Error("Atendimento inválido.")
-        }
-
-        return jwt.sign(
-            { id: atendimento.id, dia: atendimento.dia, hora: atendimento.hora, valor: atendimento.valor  },
-            JWT_SEGREDO,
-            { expiresIn: 60 * 60 }
-        )
-    }
 }
 
 export default new ServiceAtendimento()

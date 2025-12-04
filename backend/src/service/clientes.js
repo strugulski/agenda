@@ -43,9 +43,7 @@ class ServiceCliente {
     async Update(id, nome, senha) {
         const oldCliente = await Cliente.findByPk(id)
         
-        oldCliente.nome = nome
-            ? await bcrypt.hash(String(nome), SALT)
-            : oldCliente.nome
+        oldCliente.nome = nome || oldCliente.nome
 
         oldCliente.senha = senha
             ? await bcrypt.hash(String(senha), SALT)

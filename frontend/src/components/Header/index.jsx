@@ -4,24 +4,24 @@ import { AuthContext } from '../../auth/Context'
 import { useContext } from 'react'
 
 export default function Header() {
-
+  
     const { token } = useContext(AuthContext)
 
     return (
         <header>
-            <h1>Minha AGENDA</h1>
+            <h1>Agenda</h1>
             <nav>
-                <Link to='/home'>
+                <Link to='/'>
                     <button>
                         Inicio
                     </button>
                 </Link>
-                              {
+                {
                     !token
                         ? null
-                        : <Link to="../../api/clientes">
+                        : <Link to='/clientes'>
                             <button>
-                                Clientes
+                                Cliente
                             </button>
                         </Link>
                 }
@@ -30,7 +30,7 @@ export default function Header() {
                         Login
                     </button>
                 </Link>
-                  <Link to='../../api/atendimento'>
+                <Link to='/Atendimento'>
                     <button>
                         Atendimento
                     </button>

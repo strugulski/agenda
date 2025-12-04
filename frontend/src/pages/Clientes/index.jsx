@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react'
-import { deleteCliente, getClientes } from '../../api/clientes'
+import { deleteCliente, getCliente } from '../../api/cliente.jsx'
 import { Link, useNavigate } from 'react-router-dom'
 import './styles.css'
 import { toast } from 'react-toastify'
 
-function Clientes() {
+function Cliente() {
     const navigate = useNavigate()
-    const [clientes, setClientes] = useState([])
+    const [users, setUsers] = useState([])
 
-    const handleUpdate = async (cliente) => {
-        navigate('/update/cliente', { state: { cliente } })
+    const handleUpdate = async (user) => {
+        navigate('/update/cliente', { state: { user } })
     }
 
     const handleDelete = async (id) => {
@@ -20,42 +20,39 @@ function Clientes() {
             return
         }
 
-        setClientes(clientes =>clientes.filter(cliente => cliente.id !== id))
+        setUsers(users => users.filter(user => user.id !== id))
     }
 
     useEffect(() => {
         async function carregar() {
-            const allClientes = await getClientes()
-            setClientes(allClientes)
+            const allClientes = await getCliente()
+            setUsers(allClientes)
         }
         carregar()
     }, [])
 
     return (
         <main>
-            <div className='cliente-list'>
+            <div className='user-list'>
                 <div>
-                    <Link to={'./create/cliente'}>
+                    <Link to={'/create/cliente'}>
                         <button>Criar</button>
-                        <a href="./create"></a>
                     </Link>
                 </div>
-                <div className='cliente header' key='header'>
-                    
+                <div className='user header' key='header'>
+                    <label>Nome</label>
                     <label>Email</label>
-                    <label>Senha</label>
-                    
+                    <label>Ações</label>
                 </div>
                 {
-                    clientes.length == 0
+                    users.length == 0
                         ? <div className='cliente'>
-                            <label>Não tem ngm</label>
+                           
                         </div>
-                        : clientes.map(cliente =>
+                        : users.map(cliente =>
                             <div className='cliente' key={cliente.id}>
+                                <label>{cliente.nome}</label>
                                 <label>{cliente.email}</label>
-                                <label>{cliente.senha}</label>
-                                
                                 <div className='actions'>
                                     <button
                                         type='button'
@@ -73,4 +70,4 @@ function Clientes() {
     )
 }
 
-export default Clientes
+export default Cliente

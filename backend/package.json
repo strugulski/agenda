@@ -8,7 +8,7 @@
     "dev": "node --watch ./src/index.js",
     "test": "cross-env TEST=true node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage"
   },
-  "author": "Jonatas STRUGULSKI",
+  "author": "Jonatas Strugulski",
   "license": "ISC",
   "dependencies": {
     "-": "^0.0.1",
@@ -18,9 +18,9 @@
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.15.3",
-    "react": "^19.2.0",
-    "react-router-dom": "^7.9.6",
-    "react-toastify": "^11.0.5",
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1",
+    "react-router-dom": "^7.10.0",
     "sequelize": "^6.37.7",
     "toastify": "^2.0.1"
   },

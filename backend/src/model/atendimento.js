@@ -2,7 +2,7 @@ import database from "../config/database.js"
 
 class Atendimento {
     constructor() {
-        this.model = database.db.define('atendimentos', {
+        this.model = database.db.define('atendimento', {
             id: {
                 type: database.db.Sequelize.INTEGER,
                 primaryKey: true,
@@ -18,10 +18,20 @@ class Atendimento {
                 type: database.db.Sequelize.STRING
             },
             concluido: {
-                type: database.db.Sequelize.STRING
+                type: database.db.Sequelize.BOOLEAN
             },
-            
+            clienteId: {
+                type: database.db.Sequelize.INTEGER,
+                allowNull: false,
+                references: {
+                    model: 'clientes',
+                    key: 'id'
+                }
+            }  
         })
+
+        
+
     }
 }
 

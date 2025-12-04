@@ -1,8 +1,8 @@
 import jwt from 'jsonwebtoken'
-import ServiceCliente from '../service/cliente.js'
+import ServiceUser from '../service/users.js'
 const JWT_SEGREDO = "M3uS3gr3d0"
 
-export default function authMiddleware() {
+export default function authMiddleware(roles = []) {
     return async (req, res, next) => {
         try {
             const token = req.headers['authorization']
@@ -11,16 +11,16 @@ export default function authMiddleware() {
             }
             const decoded = jwt.verify(token.split(' ')[1], JWT_SEGREDO)
 
-            const cliente = await ServiceCliente.FindOne(decoded.id)
+            const user = await ServiceUser.FindOne(decoded.id)
 
             // if(
             //     roles.length && 
-            //     !roles.includes(cliente.permissao)
+            //     !roles.includes(user.permissao)
             // ) {
             //     throw new Error("Você não ter permissão para realizar esta ação")
             // }
 
-            req.headers.cliente = cliente
+            req.headers.user = user
             next()
         } catch (erro) {
             res.status(403).send({

@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react'
-import { deleteAtendimento, getAtendimento } from '../../api/atendimento'
+import { deleteAtendimento, getAtendimentos } from '../../api/atendimentos'
 import { Link, useNavigate } from 'react-router-dom'
-import './styles.css'
-import { toast } from 'react-toastify'
 
-function Atendimento() {
+function Atendimentos() {
     const navigate = useNavigate()
-    const [atendimento, setAtendimento] = useState([])
+    const [conteudo, setConteudo] = useState([])
 
     const handleUpdate = async (atendimento) => {
         navigate('/update/atendimento', { state: { atendimento } })
@@ -15,62 +13,59 @@ function Atendimento() {
     const handleDelete = async (id) => {
         const response = await deleteAtendimento(id)
 
-        if (response.status !== 204) {
-            toast("Erro ao deletar, tente novamente, mais tarde")
+        if (response.status != 204) {
+            console.log("Erro ao deletar!!!")
             return
         }
 
-        setClientes(atendimento =>atendimento.filter(atendimento => atendimento.id !== id))
+        setConteudo(atendimentos => atendimentos.filter(atendimento => atendimento.id != id))
     }
 
     useEffect(() => {
-        async function carregar() {
-            const allAtendimento = await getAtendimento()
-            setAtendimento(allAtendimento)
+        async function Carregar() {
+            const todosAtendimentos = await getAtendimentos();
+            setConteudo(todosAtendimentos);
         }
-        carregar()
+        Carregar();
     }, [])
 
     return (
         <main>
-            <div className='atendimento-list'>
-                <div>
-                    <Link to={'/create/atendimento'}>
-                        <button>Criar</button>
-                    </Link>
-                    <a href="./create.jsx"></a>
+            <Link to={'/create/atendimento'}>
+                <button>Criar</button>
+            </Link>
+            <div className='user header' key='header'>
+                    <label>Dia</label>
+                    <label>Hora</label>
+                    <label>Valor</label>
                 </div>
-                <div className='atendimento header' key='header'>
-                    <label>dia</label>
-                    <label>hora</label>
-                    <label>valor</label>
-                    
-                </div>
-                {
-                    atendimento.length == 0
-                        ? <div className='atendimento'>
-                            <label>Não tem agenda</label>
-                        </div>
-                        : atendimento.map(atendimento =>
-                            <div className='cliente' key={atendimento.id}>
-                                <label>{atendimento.dia}</label>
-                                <label>{atendimento.hora}</label>
-                                <label>{atendimento.valor}</label>
-                                <div className='actions'>
-                                    <button
-                                        type='button'
-                                        onClick={() => handleUpdate(atendimento)}
-                                    >Alterar</button>
-                                    <button
-                                        type='button'
-                                        onClick={() => handleDelete(atendimento.id)}
-                                    >Deleta</button>
-                                </div>
-                            </div>)
-                }
-            </div>
+            {
+                conteudo.length == 0
+                    ? <div>
+                        <label>Nenhum atendimento cadastrado no seu nome (Ou não está logado)</label>
+                    </div>
+                    : conteudo.map(atendimentos =>
+                        <div className='card char' key={atendimentos.id}>
+                            <h2>Atendimento Nº: {atendimentos.id}</h2>
+                            <h2>Dia: {atendimentos.dia}</h2>
+                            <h2>Hora: {atendimentos.hora}</h2>
+                            <h2>Valor: {atendimentos.valor}</h2>
+                            <h2>Concluido: {atendimentos.concluido ? 'Sim' : 'Nao'}</h2>
+                            <div className='actions'>
+                                <button
+                                    type='button'
+                                    onClick={() => handleUpdate(atendimentos)}
+                                >Alterar</button>
+
+                                <button
+                                    type='button'
+                                    onClick={() => handleDelete(atendimentos.id)}
+                                >Deletar</button>
+                            </div>
+                        </div>)
+            }
         </main>
     )
 }
 
-export default Atendimento
+export default Atendimentos
